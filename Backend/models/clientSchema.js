@@ -15,8 +15,7 @@ const clientSchema = new mongoose.Schema({
      },
      phone :{
           type : Number, 
-          max : 10,
-          min : 10
+         
      },
      password :{
           type : String,
@@ -45,26 +44,26 @@ const clientSchema = new mongoose.Schema({
 });
 
 // hashing
-clientSchema.pre('save', async function(next){
-     if(this.isModified('password')){
-          this.password = bcrypt.hash(this.password,12);
-     }
-     next();
-})
+// clientSchema.pre('save', async function(next){
+//      if(this.isModified('password')){
+//           this.password = bcrypt.hash(this.password,12);
+//      }
+//      next();
+// })
 
 //token
 
-clientSchema.methods.generateAuthToken = async function(){
-     try{
-          let token = jwt.sign({_id:this._id},process.env.SECRET_KEY);
-          this.tokens = this.tokens.concat({token:token});
-         await this.save();
-          return token
-     }
-     catch(err){
-          console.log(err);
-     }
-}
+// clientSchema.methods.generateAuthToken = async function(){
+//      try{
+//           let token = jwt.sign({_id:this._id},process.env.SECRET_KEY);
+//           this.tokens = this.tokens.concat({token:token});
+//          await this.save();
+//           return token
+//      }
+//      catch(err){
+//           console.log(err);
+//      }
+// }
 
 
 const Client = mongoose.model('Client',clientSchema);

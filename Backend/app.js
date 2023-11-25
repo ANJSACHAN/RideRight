@@ -3,11 +3,13 @@ const express = require('express');
 
 const app = express();
 const mongoose = require('mongoose');
-
+const cors = require('cors');
 const Client = require('./models/clientSchema');
 
+dotenv.config()
 
-mongoose.connect('mongodb://127.0.0.1:27017/movieApp')
+
+mongoose.connect('mongodb://127.0.0.1:27017/RideRight')
 .then(()=>{
      console.log("DB Connected");
 })
@@ -18,6 +20,7 @@ mongoose.connect('mongodb://127.0.0.1:27017/movieApp')
 
 app.use(express.json());
 
+app.use(cors({ credentials: true }));
 app.use(require('./routes/auth'));
 
 
@@ -52,6 +55,6 @@ app.get('/Signup',(req,res)=>{
      res.send("hello");
 })
 
-app.listen(3000, ()=>{
-     console.log("server is running at port no. 3000");
+app.listen(8000, ()=>{
+     console.log("server is running at port no. 8000");
 })

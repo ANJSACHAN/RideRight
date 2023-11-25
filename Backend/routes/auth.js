@@ -2,17 +2,25 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
 const jwt = require ('jsonwebtoken');
+const Client = require('../models/clientSchema');
+const dotenv = require('dotenv')
+dotenv.config()
+
+
 
 router.get('/',(req,res)=>{
      res.send("Hello from server router");
 })
 
 router.post('/register', async (req,res)=>{
-    const {name , email ,phone, password, car } = req.body;
-
-    if(!name || !email || !phone || !password || !car){
+    const {name , email ,phone, password } = req.body;
+     console.log(name);
+    if(!name || !email || !phone || !password ){
      return res.status(422).json({error : "Plz filled the field"});
     }
+    const epass = await bcrypt.hash(password, 12);
+    console.log("bhai ye ");
+    console.log( epass);
 
     try{
     const clientExist = await Client.findOne({email : email});
@@ -23,14 +31,14 @@ router.post('/register', async (req,res)=>{
     }
     
 
-    const client = new Client ({name, email, phone , password, car});
+    const client = new Client ({name, email, phone , password : epass});
 
 
 
 
      await client.save();
 
-     res.status(201).json({message:" user registered successfuly"});
+     res.status(201).json({message:" client registered successfuly"});
 
     }
     catch(err) {
@@ -41,45 +49,41 @@ router.post('/register', async (req,res)=>{
 });
 
 
-router.post('./login', async( req,res)=>{
-     // console.log(req.body);
+router.post('/login', async (req, res) => {
+    console.log("login");
+    const { email, password } = req.body;
 
-     try{
-          let token;
-          const{email,password} = req.body;
+    console.log(email + " " + password);
 
-          if(!email || !password){
-               return res.status(400).json({error : "plz filled the data"})
-          }
-          
-          const clientLogin = await Client.findOne({email:email});
+    try {
+        const client = await Client.findOne({ email });
 
-          if(clientLogin){
-               const isMatch = await bcrypt.compare(password, clientlogin.password);
+        if (!client) {
+            return res.json({ error: "Client not found" });
+        }
 
-               token = clientLogin.generateAuthToken();
-               console.log(token);
+        console.log("Stored Password:", client.password);
+        console.log("Provided Password:", password);
 
-               res.cookie("jwtoken",token, {
-               expires:new Date(Date.now()+25892000000),
-               httpOnly:true})
+        const isPasswordMatch = await bcrypt.compare(password, client.password);
 
-               if(!isMatch){
-                   res.status(400).json({error : "Invalid Password"});
-               }
-              else{
-                   res.json({message :"Client signin successfully"});
-              }
-          }
-          else{
-               res.status(400).json({error : "Invalid Password"});
-          }
+        console.log("Password Match Result:", isPasswordMatch);
 
-      }
-          catch(err){
-               console.log(err);
-          }
-     });
+        if (isPasswordMatch) {
+            console.log("Password matched");
+            const token = jwt.sign(
+                { email: client.email, role: client.role, name: client.name, id: client._id },
+                process.env.JWT_SECRET
+            );
+                       
+            return res.status(201).json({ status: "ok", message: "Login Successfully", data: token });
+        }
 
+        return res.json({ status: "error", error: "Invalid Authentication" });
+    } catch (err) {
+        console.log(err);
+        return res.json({ status: "error", error: "Internal Server Error" });
+    }
+});
 
 module.exports = router;

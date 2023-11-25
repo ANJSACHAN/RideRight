@@ -7,21 +7,23 @@ import Contact from "./Components/Contact"
 import Signin from "./Components/Signin"
 import Signup from "./Components/Signup"
 import Main from "./Components/Main"
-
-
+import Errorpage from './Components/Errorpage'
+import { ToastContainer, toast } from 'react-toastify';
 
 
 export default function App() {
   return (
     <>
     <Navbar/>
-    <Routes>        
+    <Routes >        
       <Route path="/about"  element={<About/>} />
       <Route path="/contact"  element={<Contact/>} />
       <Route path="/signin"  element={<Signin/>} />
       <Route path="/signup"  element={<Signup/>} />
-      <Route path="/Main"  element={<Main/>} />
+      <Route path="/"  element={<Main/>} />
+      <Route path= "*" element={<Errorpage/>} />
     </Routes>
+    <ToastContainer/>
     </>
   )
 }
