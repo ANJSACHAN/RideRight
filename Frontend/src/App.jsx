@@ -9,7 +9,7 @@ import Signup from "./Components/Signup"
 import Main from "./Components/Main"
 import Errorpage from './Components/Errorpage'
 import { ToastContainer, toast } from 'react-toastify';
-
+// import { ToastContainer } from "react-toastify";
 
 export default function App() {
   return (
@@ -23,7 +23,7 @@ export default function App() {
       <Route path="/"  element={<Main/>} />
       <Route path= "*" element={<Errorpage/>} />
     </Routes>
-    <ToastContainer/>
+    {/* <ToastContainer/> */}
     </>
   )
 }

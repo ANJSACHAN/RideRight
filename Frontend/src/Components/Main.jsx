@@ -1,28 +1,27 @@
 import React from 'react'
+import H2 from './HomePage/H2';
+import H1 from './HomePage/H1';
+import H4 from './HomePage/H4';
+import H5 from './HomePage/H5';
+import H6 from './HomePage/H6';
+import H8 from './HomePage/H8';
+
 
 export default function Main() {
   return (
-    <div className='mt-20'>
-     <section className="dark:bg-gray-800 dark:text-gray-100">
-	<div className="container flex flex-col justify-center px-4 py-8 mx-auto md:p-8">
-		<h2 className="text-2xl font-semibold sm:text-4xl">Frequently Asked Questions</h2>
-		<p className="mt-4 mb-8 dark:text-gray-400">Sagittis tempor donec id vestibulum viverra. Neque condimentum primis orci at lacus amet bibendum.</p>
-		<div className="space-y-4">
-			<details className="w-full border rounded-lg">
-				<summary className="px-4 py-6 focus:outline-none focus-visible:ri">Ex orci laoreet egestas sapien magna egestas scelerisque?</summary>
-				<p className="px-4 py-6 pt-0 ml-4 -mt-4 dark:text-gray-400">Lectus iaculis orci metus vitae ligula dictum per. Nisl per nullam taciti at adipiscing est. </p>
-			</details>
-			<details className="w-full border rounded-lg">
-				<summary className="px-4 py-6 focus:outline-none focus-visible:ri">Lorem at arcu rutrum viverra metus sapien venenatis lobortis odio?</summary>
-				<p className="px-4 py-6 pt-0 ml-4 -mt-4 dark:text-gray-400">Tincidunt ut hac condimentum rhoncus phasellus nostra. Magna porttitor egestas tincidunt neque vehicula potenti. </p>
-			</details>
-			<details className="w-full border rounded-lg">
-				<summary className="px-4 py-6 focus:outline-none focus-visible:ri">Eleifend feugiat sollicitudin laoreet adipiscing bibendum suscipit erat?</summary>
-				<p className="px-4 py-6 pt-0 ml-4 -mt-4 dark:text-gray-400">Justo libero tellus integer tincidunt justo semper consequat venenatis aliquet imperdiet. Ultricies urna proin fusce nulla pretium sodales vel magna et massa euismod vulputate sed. </p>
-			</details>
-		</div>
-	</div>
-</section>
-    </div>
+    <div className=''>
+<H1></H1>
+<div className='h-[100vh] bg-black flex flex-col text-center justify-center'><H6></H6></div>
+<H2></H2>
+<div className='h-[100vh] bg-black flex flex-col text-center justify-center'><H4></H4></div>
+	
+  <div className='h-[60vh]'>   <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d216681.54168577853!2d77.87411869453125!3d30.193914000000014!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390925b2d5911f41%3A0xc980c91102bfbaf2!2sFreedom%20Car%20Rental!5e1!3m2!1sen!2sin!4v1701099864132!5m2!1sen!2sin"
+        height="100%" width="100%"></iframe></div>
+
+<div className='h-[100vh] bg-black flex flex-col text-center justify-center'><H5></H5></div>
+<H8></H8>
+     
+     </div>
   )
 }
