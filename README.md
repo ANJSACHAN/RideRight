@@ -2,7 +2,7 @@
 Car Rental System
 
 # Description
-A comprehensive car rental system designed to simplify the process of renting vehicles. This system is developed using the MERN stack, with Java for backend functionalities. Tailwind CSS is used for a sleek and responsive front-end design.
+A comprehensive car rental system designed to simplify the process of renting vehicles. This system is developed using the MERN stack. Tailwind CSS is used for a sleek and responsive front-end design.
 
 # Features
 User authentication and authorization
